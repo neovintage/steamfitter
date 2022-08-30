@@ -19,7 +19,7 @@ module Steamfitter
     # @option config [Configuration] Configuration for initializing the object, default to Configuration.default
     def initialize(config = Configuration.default)
       @config = config
-      @user_agent = "OpenAPI-Generator/#{VERSION}/ruby"
+      @user_agent = "ruby/steamfitter/#{VERSION}"
       @default_headers = {
         'Content-Type' => 'application/json',
         'User-Agent' => @user_agent
@@ -35,16 +35,7 @@ module Steamfitter
     # @return [Array<(Object, Integer, Hash)>] an array of 3 elements:
     #   the data deserialized from response body (could be nil), response status code and response headers.
     def call_api(http_method, path, opts = {})
-      ssl_options = {
-        :ca_file => @config.ssl_ca_file,
-        :verify => @config.ssl_verify,
-        :verify_mode => @config.ssl_verify_mode,
-        :client_cert => @config.ssl_client_cert,
-        :client_key => @config.ssl_client_key
-      }
-
-      connection = Faraday.new(:url => config.base_url, :ssl => ssl_options) do |conn|
-        conn.request(:basic_auth, config.username, config.password)
+      connection = Faraday.new(:url => config.base_url) do |conn|
         @config.configure_middleware(conn)
         if opts[:header_params]["Content-Type"] == "multipart/form-data"
           conn.request :multipart
