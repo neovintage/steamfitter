@@ -1,0 +1,10 @@
+gemAuthor: rimas silkaitis
+gemAuthorEmail: rimas@meroxa.io
+gemHomepage: https://github.com/neovintage/steamfitter
+gemLicense: MIT
+gemName: steamfitter
+gemRequiredRubyVersion: '>= 3.1'
+gemSummary: REST Client for Conduit. Programmatically move data between data stores.
+gemVersion: 0.1.0
+library: faraday
+moduleName: Steamfitter
